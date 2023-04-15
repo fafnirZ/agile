@@ -35,8 +35,8 @@ export const loginHandler = (req, res) => {
   const password = requestBody.password
   try {
     const user = usersDatabase.find(user => user.email === email)
-    if (!user) { res.send("email does not exist")}
-    if (user.password !== password) { res.send("invalid credentials")}
+    if (!user) { res.send("email does not exist"); return;}
+    if (user.password !== password) { res.send("invalid credentials"); return;}
     // else
     res.send(`login successful!\nwelcome ${user.email}!!!\n`)
   } catch(err) {
