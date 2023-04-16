@@ -16,6 +16,14 @@ export const registerHandler = (req: any, res: any) => {
         email: email,
         password: password
       };
+      if (password.length < 9){
+        res.send("password minimum 9 characters")
+        return;
+      }
+      if (!/\d/.test(password) || /^\d+$/.test(password)){
+        res.send("require alphanumeric password")
+        return;
+      }
       usersDatabase.push(newUserObj);
       console.log(usersDatabase)
       res.send("user registered")
