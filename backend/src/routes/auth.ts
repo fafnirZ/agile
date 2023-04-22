@@ -1,6 +1,6 @@
 import { usersDatabase } from '../data/Users';
 
-export const registerHandler = (req, res) => {
+export const registerHandler = (req: any, res: any) => {
   // only excepts post request
   if (req.method != "POST") return;
   if (!req.body) return;
@@ -26,7 +26,7 @@ export const registerHandler = (req, res) => {
   }
 }
 
-export const loginHandler = (req, res) => {
+export const loginHandler = (req: any, res: any) => {
   // only excepts post request
   if (req.method != "POST") return;
   if (!req.body) return;
