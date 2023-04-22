@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ListContainer from './ListContainer'
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from 'styled-components'
 
 type Props = {}
@@ -32,18 +33,57 @@ const Container = styled.div`
   padding: 50px;
 `
 
+// const reorder = (list, startIndex, endIndex) => {
+//   const result = Array.from(list);
+//   const [removed] = result.splice(startIndex, 1);
+//   result.splice(endIndex, 0, removed);
+
+//   return result;
+// };
+
+
 function BoardContainer({}: Props) {
+  const [items, setItems] = useState(listObjs);
+
+  const onDragEnd = (result: any) => {
+    // if (!result.destination) {
+    //   return;
+    // }
+
+    // if (result.destination.index === result.source.index) {
+    //   return;
+    // }
+
+    // const itemsReordered = reorder(
+    //   items.todo,
+    //   result.source.index,
+    //   result.destination.index
+    // );
+
+    // setItems({
+    //   ...items,
+    //   "todo": itemsReordered
+    // });
+  }
 
   const renderListContainers = () => Object.entries(listObjs).map(
-    ([listName, listItems]) => (
-      <ListContainer name={listName} items={listItems}/>
+    ([listName, listItems], index) => (
+        <ListContainer name={listName} items={listItems} index={index}/>
     )
   )
-
+ 
   return (
-    <Container>
-      {renderListContainers()}
-    </Container>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable droppableId="kanban">
+        {
+          provided => (
+            <Container ref={provided.innerRef} {...provided.droppableProps}>
+              {renderListContainers()}
+            </Container>
+          )
+        }
+      </Droppable>
+    </DragDropContext>
   )
 }
 

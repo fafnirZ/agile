@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Draggable } from "react-beautiful-dnd";
 
 type Props = {
   title: string;
@@ -20,6 +21,6 @@ const Container = styled.div`
 
 export default function ItemContainer({ title }: Props) {
   return (
-    <Container>{title}</Container>
+      <Container>{title}</Container>
   )
 }
