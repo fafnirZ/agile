@@ -64,17 +64,18 @@ function BoardContainer({}: Props) {
     //   ...items,
     //   "todo": itemsReordered
     // });
+    console.log("hi")
   }
 
   const renderListContainers = () => Object.entries(listObjs).map(
     ([listName, listItems], index) => (
-        <ListContainer name={listName} items={listItems} index={index}/>
+        <ListContainer name={listName} items={listItems}/>
     )
   )
  
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="kanban">
+      <Droppable droppableId="list">
         {
           provided => (
             <Container ref={provided.innerRef} {...provided.droppableProps}>

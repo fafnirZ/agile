@@ -1,12 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import ItemContainer from './ItemContainer';
-import { Draggable } from "react-beautiful-dnd";
+
 
 type Props = {
   name: string;
   items: ItemType[];
-  index: number;
 }
 
 const Container = styled.div`
@@ -26,24 +25,12 @@ const TextContainer = styled.div`
 `
 
 export default function ListContainer({
-  name, items, index
+  name, items
 }: Props) {
   return (
     <Container>
       <TextContainer>{name}</TextContainer>
-      <Draggable draggableId={name} index={index}>
-        {
-          provided => (
-            <div 
-              ref={provided.innerRef}
-              {...provided.draggableProps}
-              {...provided.dragHandleProps}
-            >
-              {items.map((item, index) => (<ItemContainer title={item.title}/>))}
-            </div>
-          )
-        }
-      </Draggable>
+      {items.map((item, index) => (<ItemContainer title={item.title} index={index}/>))}
     </Container>
 
   )

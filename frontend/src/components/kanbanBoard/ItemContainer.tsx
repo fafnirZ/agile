@@ -4,6 +4,7 @@ import { Draggable } from "react-beautiful-dnd";
 
 type Props = {
   title: string;
+  index: number;
 }
 
 const Container = styled.div`
@@ -19,8 +20,20 @@ const Container = styled.div`
   }
 `
 
-export default function ItemContainer({ title }: Props) {
+export default function ItemContainer({ title, index }: Props) {
   return (
-      <Container>{title}</Container>
+    <Draggable draggableId={title} index={index}>
+    {
+      provided => (
+        <div 
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <Container>{title}</Container>
+        </div>
+      )
+    }
+    </Draggable>
   )
 }
