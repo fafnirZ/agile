@@ -1,10 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import ItemContainer from './ItemContainer';
+import { Droppable } from '@hello-pangea/dnd';
+
 
 type Props = {
   name: string;
   items: ItemType[];
+  index: number;
 }
 
 const Container = styled.div`
@@ -24,12 +27,24 @@ const TextContainer = styled.div`
 `
 
 export default function ListContainer({
-  name, items
+  name, items, index
 }: Props) {
   return (
-    <Container>
-      <TextContainer>{name}</TextContainer>
-      {items.map(item => (<ItemContainer title={item.title}/>))}
-    </Container>
+    <Droppable 
+      droppableId={`list-${index}`}
+    >
+      {(provided, snapshot) => (
+        <div 
+          ref={provided.innerRef} 
+          {...provided.droppableProps}
+        >
+          <Container>
+            <TextContainer>{name}</TextContainer>
+            {items.map((item, index) => (<ItemContainer title={item.title} index={index}/>))}
+          </Container>
+          {provided.placeholder}
+        </div>
+      )}
+    </Droppable>
   )
 }

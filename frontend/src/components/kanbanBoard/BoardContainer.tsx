@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ListContainer from './ListContainer'
+import { DragDropContext } from "@hello-pangea/dnd";
 import styled from 'styled-components'
 
 type Props = {}
@@ -32,18 +33,34 @@ const Container = styled.div`
   padding: 50px;
 `
 
+// const reorder = (list, startIndex, endIndex) => {
+//   const result = Array.from(list);
+//   const [removed] = result.splice(startIndex, 1);
+//   result.splice(endIndex, 0, removed);
+
+//   return result;
+// };
+
+
 function BoardContainer({}: Props) {
+  const [items, setItems] = useState(listObjs);
 
-  const renderListContainers = () => Object.entries(listObjs).map(
-    ([listName, listItems]) => (
-      <ListContainer name={listName} items={listItems}/>
-    )
-  )
+  const onDragEnd = (result: any) => {
+    console.log(result)
+  }
 
+ 
   return (
-    <Container>
-      {renderListContainers()}
-    </Container>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Container>
+        {Object.entries(items).map(
+          ([listName, listItems], index) => (
+              <ListContainer name={listName} items={listItems} index={index}/>
+          )
+        )}
+      </Container>
+
+    </DragDropContext>
   )
 }
 
