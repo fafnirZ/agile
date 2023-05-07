@@ -15,3 +15,8 @@ curl -d "email=abc&password=123456789" -X POST localhost:8080/api/v1/register
 curl -d "email=abc&password=abcd56789" -X POST localhost:8080/api/v1/register
 curl -d "email=abc&password=abcd56789" -X POST localhost:8080/api/v1/login
 ```
+
+## Make test script executable
+```
+chmod +x test.sh
+```
