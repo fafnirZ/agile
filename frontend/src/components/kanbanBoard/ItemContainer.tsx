@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Draggable } from "@hello-pangea/dnd";
 
 type Props = {
+  id: string; 
   title: string;
   index: number;
 }
@@ -20,16 +21,15 @@ const Container = styled.div`
   }
 `
 
-export default function ItemContainer({ title, index }: Props) {
+export default function ItemContainer({ id, title, index }: Props) {
   return (
-    <Draggable draggableId={title} index={index}>
+    <Draggable draggableId={id} index={index}>
     {
       (provided, snapshot) => (
         <div
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          role="application"
         >
           <Container>
             <p>{title}</p>

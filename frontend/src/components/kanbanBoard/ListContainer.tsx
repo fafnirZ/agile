@@ -5,9 +5,9 @@ import { Droppable } from '@hello-pangea/dnd';
 
 
 type Props = {
+  id: string;
   name: string;
   items: ItemType[];
-  index: number;
 }
 
 const Container = styled.div`
@@ -27,11 +27,11 @@ const TextContainer = styled.div`
 `
 
 export default function ListContainer({
-  name, items, index
+  id, name, items
 }: Props) {
   return (
     <Droppable 
-      droppableId={`list-${index}`}
+      droppableId={id}
     >
       {(provided, snapshot) => (
         <div 
@@ -40,7 +40,9 @@ export default function ListContainer({
         >
           <Container>
             <TextContainer>{name}</TextContainer>
-            {items.map((item, index) => (<ItemContainer title={item.title} index={index}/>))}
+            {items.map((item, index) => (
+              <ItemContainer id={item.id} title={item.title} index={index}/>
+            ))}
           </Container>
           {provided.placeholder}
         </div>
