@@ -1,6 +1,8 @@
+import { Request,Response} from 'express';
 import { usersDatabase } from '../data/Users';
+import { checkAlphaNum } from './util';
 
-export const registerHandler = (req: any, res: any) => {
+export const registerHandler = (req: Request, res: Response) => {
   // only excepts post request
   if (req.method != "POST") return;
   if (!req.body) return;
@@ -16,11 +18,18 @@ export const registerHandler = (req: any, res: any) => {
         email: email,
         password: password
       };
+      if (password.length < 9){
+        res.send("password requires minimum of 9 characters \n")
+        return;
+      }
+      if(checkAlphaNum(password)){
+        res.send("password requires a mix of letters and numbers \n")
+      }
       usersDatabase.push(newUserObj);
-      console.log(usersDatabase)
-      res.send("user registered")
+      // console.log(usersDatabase)
+      res.send("user registered \n")
     }
-    res.send("user already exists")
+    res.send("user already exists \n")
   } catch(err) {
     // do nothing 
   }
