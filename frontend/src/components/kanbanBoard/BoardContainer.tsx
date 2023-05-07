@@ -1,31 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ListContainer from './ListContainer'
 import { DragDropContext } from "@hello-pangea/dnd";
 import styled from 'styled-components'
+import { kanbanMockObj } from '../../mock/kanban';
 
 type Props = {}
-
-// hard-coded lists
-const listObjs = {
-  todo: [
-    {
-      title: "code this thing"
-    },
-    {
-      title: "another thing"
-    }
-  ],
-  doing: [
-    {
-      title: "doing stuff"
-    }
-  ],
-  done: [
-    {
-      title: "something I've completed"
-    }
-  ]
-}
 
 const Container = styled.div`
   display: flex;
@@ -43,12 +22,21 @@ const Container = styled.div`
 
 
 function BoardContainer({}: Props) {
-  const [items, setItems] = useState(listObjs);
+
+  const [items, setItems] = useState<Record<string, ItemType[]>>({});
+
+  // onMount
+  useEffect(() => {
+    // use mock data
+    setItems(kanbanMockObj)
+
+    // api call
+    // TODO
+  },[])
 
   const onDragEnd = (result: any) => {
     console.log(result)
   }
-
  
   return (
     <DragDropContext onDragEnd={onDragEnd}>
