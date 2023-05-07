@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Draggable } from "react-beautiful-dnd";
+import { Draggable } from "@hello-pangea/dnd";
 
 type Props = {
   title: string;
@@ -24,13 +24,16 @@ export default function ItemContainer({ title, index }: Props) {
   return (
     <Draggable draggableId={title} index={index}>
     {
-      provided => (
-        <div 
+      (provided, snapshot) => (
+        <div
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          role="application"
         >
-          <Container>{title}</Container>
+          <Container>
+            <p>{title}</p>
+          </Container>
         </div>
       )
     }
