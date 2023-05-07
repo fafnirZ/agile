@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ListContainer from './ListContainer'
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { DragDropContext } from "@hello-pangea/dnd";
 import styled from 'styled-components'
 
 type Props = {}
@@ -46,44 +46,20 @@ function BoardContainer({}: Props) {
   const [items, setItems] = useState(listObjs);
 
   const onDragEnd = (result: any) => {
-    // if (!result.destination) {
-    //   return;
-    // }
-
-    // if (result.destination.index === result.source.index) {
-    //   return;
-    // }
-
-    // const itemsReordered = reorder(
-    //   items.todo,
-    //   result.source.index,
-    //   result.destination.index
-    // );
-
-    // setItems({
-    //   ...items,
-    //   "todo": itemsReordered
-    // });
-    console.log("hi")
+    console.log(result)
   }
 
-  const renderListContainers = () => Object.entries(listObjs).map(
-    ([listName, listItems], index) => (
-        <ListContainer name={listName} items={listItems}/>
-    )
-  )
  
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="list">
-        {
-          provided => (
-            <Container ref={provided.innerRef} {...provided.droppableProps}>
-              {renderListContainers()}
-            </Container>
+      <Container>
+        {Object.entries(items).map(
+          ([listName, listItems], index) => (
+              <ListContainer name={listName} items={listItems} index={index}/>
           )
-        }
-      </Droppable>
+        )}
+      </Container>
+
     </DragDropContext>
   )
 }
