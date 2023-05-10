@@ -12,8 +12,11 @@ const Container = styled.div`
   border: 0.5px solid grey;
   margin: 10px;
   padding: 20px 10px;
-  border-radius: 5px;
+  border-radius: 8px;
   height: 30px;
+  box-shadow: 0 1px 0 #091e4240;
+  background-color: #fff;
+  
 
   &:hover {
     background: grey;

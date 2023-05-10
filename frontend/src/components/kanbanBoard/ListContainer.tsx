@@ -17,7 +17,7 @@ const Container = styled.div`
   width: 300px;
   height: 800px;
   background: white;
-  border-radius: 20px;
+  border-radius: 12px;
   gap: 20px;
 `
 
