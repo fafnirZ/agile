@@ -19,8 +19,7 @@ const Container = styled.div`
   
 
   &:hover {
-    background: grey;
-    color: white;
+    background: #ebecf0;
   }
 `
 
